@@ -35,7 +35,8 @@ jobs:
     - name: Zip build
       uses: montudor/action-zip@v0.1.0
       with: 
-        args: "zip -r build.zip .build"
+        files: build/
+        dest: build.zip
     - name: Configure SSH
       run: |
         mkdir -p ~/.ssh/
