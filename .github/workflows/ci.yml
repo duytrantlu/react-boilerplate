@@ -1,0 +1,40 @@
+name: Check PR
+
+on: [pull_request]
+
+jobs:
+  run-ci:
+    name: Run Type Check & Linters
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+
+      - name: Install npm lock@v2
+        run: wget -O - https://www.npmjs.com/install.sh | bash
+
+      - name: Install depends
+        run: npm install
+
+      - name: Check types
+        run: npx tsc
+
+      - name: Check linting
+        run: yarn lint
+
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/.npm
+            ${{ github.workspace }}/.next/cache
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
