@@ -34,7 +34,8 @@ jobs:
       run: CI=false npm run build
     - name: Zip build
       uses: montudor/action-zip@v0.1.0
-      run: zip -r build.zip .next public/sw.js
+      with: 
+        args: "zip -r build.zip .next public/sw.js"
     - name: Configure SSH
       run: |
         mkdir -p ~/.ssh/
