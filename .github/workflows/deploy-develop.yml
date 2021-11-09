@@ -55,9 +55,9 @@ jobs:
     - name: Scp server
       run: scp -F ~/.ssh/config build.zip dev:/tmp
     - name: Unzip
-      run: ssh dev "rm -rf $PROJECT_PATH/$PROJECT_NAME/.next && unzip -o /tmp/build.zip -d $PROJECT_PATH/$PROJECT_NAME"
+      run: ssh dev "rm -rf $PROJECT_PATH/$PROJECT_NAME/build && unzip -o /tmp/build.zip -d $PROJECT_PATH/$PROJECT_NAME"
     - name: Deploy
-      run: ssh dev "cd $PROJECT_PATH && mkdir meno && echo 'me nha may' > test.txt"
+      run: ssh dev "cd $PROJECT_PATH/$PROJECT_NAME && npm run start"
     - name: Clean cache build
       run: ssh dev "rm -rf /tmp/build.zip"
     - uses: actions/cache@v2
