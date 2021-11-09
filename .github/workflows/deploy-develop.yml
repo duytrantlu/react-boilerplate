@@ -57,7 +57,7 @@ jobs:
     - name: Unzip
       run: ssh dev "rm -rf $PROJECT_PATH/$PROJECT_NAME/build && unzip -o /tmp/build.zip -d $PROJECT_PATH/$PROJECT_NAME"
     - name: Deploy
-      run: ssh dev "cd $PROJECT_PATH/$PROJECT_NAME && npm run start"
+      run: ssh dev "cd $PROJECT_PATH && chmod +x ./script.sh && ./script.sh"
     - name: Clean cache build
       run: ssh dev "rm -rf /tmp/build.zip"
     - uses: actions/cache@v2
